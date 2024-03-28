@@ -6,7 +6,7 @@ First, install all the packages for both the frontend and the backend:
 npm install
 ``` 
 
-Setup .env file
+Setup .env file for the backend
 
 ```bash
 MONGO_CONNECTION_STRING =
