@@ -12,6 +12,7 @@
   },
   "author": "Hristo Zagorliev",
   "dependencies": {
+    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.363.0",
