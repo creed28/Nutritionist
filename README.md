@@ -13,18 +13,17 @@ MONGO_CONNECTION_STRING =
 PORT =
 ```
 
-Then, run the development server for the frontend:
-
-```bash
-npm run dev
-
-```
-
-Finally, run the development server for the backend:
+Then, run the development server for the backend:
 
 ```bash
 npm start
 
+```
+
+Finally, run the development server for the frontend:
+
+```bash
+npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
