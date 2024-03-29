@@ -9,4 +9,8 @@ router.get("/:foodId", FoodsController.getFood);
 
 router.post("/", FoodsController.createFood);
 
+router.patch("/:foodId", FoodsController.updateFood);
+
+router.delete("/:foodId", FoodsController.deleteFood);
+
 export default router;
