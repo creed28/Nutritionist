@@ -12,4 +12,4 @@ export const MainRouter = createBrowserRouter(
         </Route>
       </Route>
   )
-)
+);
