@@ -75,4 +75,11 @@
   body {
     @apply bg-background text-foreground box-border;
   }
+
+  @layer components {
+    .formInput {
+      @apply h-12 rounded-lg bg-[#fff] outline-[#1f1f1f] w-full p-4 
+      placeholder-[#636363] md:w-[50%];
+    }
+  }
 }
