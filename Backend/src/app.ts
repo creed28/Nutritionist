@@ -1,15 +1,10 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import foodRoutes from "./routes/foods";
-import cors from "cors";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 
 const app = express();
-
-app.use(cors({
-  credentials: true,
-}));
 
 app.use(morgan("dev"));
 
