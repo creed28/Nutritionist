@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.use("/api/foods", foodRoutes);
+app.use("/api", foodRoutes);
 
 app.use((req, res, next) => {
   next(createHttpError(404, "Endpoint not found"));
