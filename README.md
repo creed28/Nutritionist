@@ -11,6 +11,8 @@ Setup .env file for the backend
 ```bash
 MONGO_CONNECTION_STRING =
 PORT =
+SESSION_SECRET = 
+
 ```
 
 Then, run the development server for the backend:
