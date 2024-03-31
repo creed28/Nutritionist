@@ -10,7 +10,8 @@ interface FoodProps {
 
 const Food = ({ food, handleUpdate, handleDelete }: FoodProps) => {
   return (
-    <div className='bg-white flex justify-between items-center w-[410px] px-4 py-2 rounded'>
+    <div className='bg-white flex justify-between items-center w-[410px] px-4 py-2 
+      rounded-lg hover:bg-[#f0f0f0]'>
       <div>
         <h3 className='font-semibold font-Rounded1c'>{food.name}</h3>
         <p className='text-[0.8rem] font-Rounded1c'>

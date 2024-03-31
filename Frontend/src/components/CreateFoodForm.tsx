@@ -33,7 +33,7 @@ const CreateFoodForm = () => {
 
   return (
     <section className="w-[500px] flex flex-col
-    bg-[#b5e2a5] py-4 my-11">
+    bg-[#b5e2a5] py-4 my-11 rounded">
       <div className="flex flex-col items-center">
         <h2 className="text-[2.3rem] font-Pacifico py-3">
           Create New Food
