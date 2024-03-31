@@ -6,7 +6,7 @@ import { FoodBody, UpdateFoodParams } from "../interfaces/food";
 
 export const getFoods: RequestHandler = async (req, res, next) => {
   try {
-    const foods = await FoodModel.find().exec();
+    const foods = await FoodModel.find({ inTable: true }).exec();
     res.status(200).json(foods);
   } catch (error) {
       next(error);
@@ -52,6 +52,7 @@ async (req, res, next) => {
       protein: protein,
       fat: fat,
       carbs: carbs,
+      inTable: true
     });
     res.status(201).json(newFood);
   } catch (error) {
@@ -62,19 +63,10 @@ async (req, res, next) => {
 export const updateFood: RequestHandler<UpdateFoodParams, unknown, FoodBody, unknown> = 
 async (req, res, next) => {
   const foodId = req.params.foodId;
-  const newName = req.body.name;
-  const newCal = req.body.kCal;
-  const newProtein = req.body.protein;
-  const newFat = req.body.fat;
-  const newCarbs = req.body.carbs;
 
   try {
     if(!mongoose.isValidObjectId(foodId)) {
       throw createHttpError(400, "Invalid food id");
-    }
-
-    if (!newName || !newCal || !newProtein || !newFat || !newCarbs) {
-      throw createHttpError(400, "Food must have all fields");
     }
 
     const food = await FoodModel.findById(foodId).exec();
@@ -83,11 +75,7 @@ async (req, res, next) => {
       throw createHttpError(404, "Food not found");
     }
 
-    food.name = newName;
-    food.kCal = newCal;
-    food.protein = newProtein;
-    food.fat = newFat;
-    food.carbs = newCarbs;
+    food.inTable = !food.inTable;
 
     const updatedFood = await food.save();
 
