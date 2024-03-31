@@ -40,7 +40,7 @@ const AuthDialog = () => {
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] max-w-[380px] flex flex-col
-         bg-[#C0E7B2]">
+         bg-[#b5e2a5]">
         <DialogHeader className="flex flex-col items-center">
           <DialogTitle className="text-[2.3rem] font-Pacifico">
             {isLoginFormActive ? "Sign In" : "Register"}

@@ -12,7 +12,6 @@ const LoginForm = () => {
           type="text"
           required
           autoFocus
-          autoComplete="off"
         />
         <Input
           placeholder="Password"
