@@ -4,5 +4,6 @@ export interface Food {
   kCal: number,
   protein: number,
   fat: number,
-  carbs: number
+  carbs: number,
+  inTable: boolean
 }
