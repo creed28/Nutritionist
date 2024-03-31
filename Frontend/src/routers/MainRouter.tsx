@@ -1,6 +1,6 @@
 import { createBrowserRouter, Route, createRoutesFromElements } from 'react-router-dom';
 import Home from '../pages/Home';
-import AddFood from '../pages/AddFood';
+import CreateFood from '../pages/CreateFood';
 import { MainLayout } from '../layouts/MainLayout';
 
 export const MainRouter = createBrowserRouter(
@@ -8,7 +8,7 @@ export const MainRouter = createBrowserRouter(
     <Route>
       <Route element={<MainLayout />}>
         <Route path='/' element={<Home />} />
-        <Route path='/add-food' element={<AddFood />} />
+        <Route path='/create-food' element={<CreateFood />} />
         </Route>
       </Route>
   )
