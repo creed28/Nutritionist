@@ -19,7 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        'Pacifico': ["Pacifico", "cursive"]
+        'Pacifico': ["Pacifico", "cursive"],
+        'Rounded1c': ['"M PLUS Rounded 1c"', 'sans-serif']
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+}
 
 @layer base {
   :root {
@@ -80,6 +87,10 @@
     .formInput {
       @apply h-12 rounded-lg bg-[#fff] outline-[#1f1f1f] w-full p-4 
       placeholder-[#636363] md:w-[50%];
+    }
+
+    .footer {
+      @apply text-center text-sm py-8 bg-[#bee9b0];
     }
   }
 }
