@@ -11,17 +11,15 @@ const Navbar = () => {
   return (
     <nav>
       <ul className="flex items-center gap-x-4 text-sm font-semibold">
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-4">
           <li>
-            <a href="/" className={`p-2 
-              ${isActive("/") && "bg-[#ed6564] hover:bg-[#FB7271]"}`}>
-                Home
+            <a href="/" className={`${isActive("/") && "activeLink"}`}>
+              Home
             </a>
           </li>
           <li>
-            <a href="/create-food" className={`p-2 
-              ${isActive("/create-food") && "bg-[#ed6564] hover:bg-[#FB7271]"}`}>
-                Create Food
+            <a href="/create-food" className={`${isActive("/create-food") && "activeLink"}`}>
+              Create Food
             </a>
           </li>
         </div>
