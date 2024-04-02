@@ -3,6 +3,7 @@ import { Button } from "./ui/Button";
 import { Input } from "./ui/Input";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import useFoodsContext from "../hooks/useFoodsContext";
 
 interface FoodInput {
   name: string,
@@ -21,10 +22,12 @@ const CreateFoodForm = () => {
     }} = useForm<FoodInput>();
 
   const navigate = useNavigate();
+  const { foods, setFoods } = useFoodsContext();
 
   const onSubmit = async (input: FoodInput) => {
     try {
-      await axios.post("/foods", input);
+      const res = await axios.post("/foods", input);
+      setFoods([...foods, res.data]);
       navigate('/');
     } catch (error) {
         console.error(error);

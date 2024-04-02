@@ -1,14 +1,15 @@
 import { Food as FoodModel } from '../models/food';
 import { IoRemoveCircle } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
+import useFoodsContext from '../hooks/useFoodsContext';
 
 interface FoodProps {
   food: FoodModel,
-  handleUpdate: (food: FoodModel) => void,
-  handleDelete: (food: FoodModel) => void
 }
 
-const Food = ({ food, handleUpdate, handleDelete }: FoodProps) => {
+const Food = ({ food }: FoodProps) => {
+  const { handleUpdate, handleDelete } = useFoodsContext();
+
   return (
     <div className='bg-white flex justify-between items-center w-[410px] px-4 py-2 
       rounded-lg hover:bg-[#f0f0f0]'>
