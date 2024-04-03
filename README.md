@@ -1,3 +1,7 @@
+# Nutritionist
+
+![image info](./Frontend/public/cover.png)
+
 ## Getting Started
 
 First, install all the packages for both the frontend and the backend:
