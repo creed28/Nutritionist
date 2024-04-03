@@ -13,8 +13,10 @@ interface FoodContextType {
   proteinTotal: number,
   carbsTotal: number,
   fatTotal: number,
+  sumValues: (foods: FoodModel[]) => void,
   handleDelete: (food: FoodModel) => void,
-  handleUpdate: (updatedFood: FoodModel) => void,
+  handleAdd: (addedFood: FoodModel) => void,
+  handleRemove: (removedFood: FoodModel) => void,
   searchResults: FoodModel[], 
   setSearchResults: React.Dispatch<React.SetStateAction<FoodModel[]>>,
   fetchSearchData: (input: string) => void,
@@ -64,21 +66,33 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     setCarbsTotal(totals.carbs);
     setFatTotal(totals.fat);
   }
-  
-  const handleUpdate = async (updatedFood: FoodModel) => {
-    try {
-      const res = await axios.patch(`/foods/${updatedFood._id}`, updatedFood);
 
-   /* if (res.data.inTable) {
+
+  const handleAdd = async (addedFood: FoodModel) => {
+    try {
+      const res = await axios.patch(`/foods/${addedFood._id}`, addedFood);
+
+      if (res.data.inTable) {
         setFoods(prevFoods => prevFoods.map((food) => 
-          food._id === updatedFood._id ? res.data : food
+          food._id === addedFood._id ? res.data : food
         ));
-      }  */
+        setFoods([...foods, addedFood]);
+        sumValues([...foods, addedFood]);
+        setSearchInput("");
+      }
+    } catch (error) {
+        console.error(error);
+    }
+  }
+  
+  const handleRemove = async (removedFood: FoodModel) => {
+    try {
+      const res = await axios.patch(`/foods/${removedFood._id}`, removedFood);
 
       if (!res.data.inTable) {
         setFoods(prevFoods => prevFoods.filter(food => food._id !== res.data._id));
-        
-        sumValues(foods.filter(food => food._id !== updatedFood._id));
+        sumValues(foods.filter(food => food._id !== removedFood._id));
+        setSearchInput("");
       }
     } catch (error) {
         console.error(error);
@@ -89,30 +103,25 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     try {
       await axios.delete(`/foods/${food._id}`);
       setFoods(prevFoods => prevFoods.filter(existingFood => existingFood._id !== food._id));
-
       sumValues(foods.filter(existingFood => existingFood._id !== food._id));
-
-      fetchSearchData(searchInput);
+      setSearchInput("");
     } catch (error) {
         console.error(error);
     }
   }
 
-  const fetchSearchData = async (input: string) => {
+  const fetchSearchData = async (searchInput: string) => {
     try {
-      const response = await axios.get("/foods");
-      const results = response.data.filter((food: FoodModel) => {
-        return (
-          input && 
-          food && 
-          food.name && 
-          food.name.toLowerCase().includes(input)
-        );
-      });
+      if (searchInput.length < 3) {
+       setSearchResults([]);
+       return;
+      }
 
-      setSearchResults(results);
+      const response = await axios.get(`/foods/search?input=${searchInput}`);
+      setSearchResults(response.data);
     } catch (error) {
-        console.error(error);
+      console.error(error);
+      throw error;
     }
   }
 
@@ -124,13 +133,15 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     carbsTotal,
     fatTotal,
     handleDelete,
-    handleUpdate,
+    handleAdd,
+    handleRemove,
     searchResults, 
     setSearchResults,
     fetchSearchData,
     searchInput,
-    setSearchInput
-  }
+    setSearchInput,
+    sumValues,
+  };
 
   return (
     <FoodContext.Provider value={contextValue}>
