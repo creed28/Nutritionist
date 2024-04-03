@@ -5,8 +5,10 @@ import mongoose from "mongoose";
 import { FoodBody, UpdateFoodParams } from "../interfaces/food";
 
 export const getFoods: RequestHandler = async (req, res, next) => {
+  const authenticatedUserId = req.session.userId;
+
   try {
-    const foods = await FoodModel.find({ inTable: true }).exec();
+    const foods = await FoodModel.find({ inTable: true, userId: authenticatedUserId }).exec();
     res.status(200).json(foods);
   } catch (error) {
       next(error);
@@ -15,13 +17,16 @@ export const getFoods: RequestHandler = async (req, res, next) => {
 
 export const searchFoods: RequestHandler = async (req, res, next) => {
   const searchInput = req.query.input;
+  const authenticatedUserId = req.session.userId;
 
   try {
     if (!searchInput || typeof searchInput !== 'string') {
       throw createHttpError(400, "Search input is required and must be a string");
     }
 
-    const foods = await FoodModel.find({ name: { $regex: new RegExp(searchInput, 'i') } }).exec();
+    const foods = await FoodModel.find({ 
+      name: { $regex: new RegExp(searchInput, 'i') }, 
+      userId: authenticatedUserId }).exec();
 
     res.status(200).json(foods);
   } catch (error) {
@@ -56,6 +61,7 @@ async (req, res, next) => {
   const protein = req.body.protein;
   const fat = req.body.fat;
   const carbs = req.body.carbs;
+  const authenticatedUserId = req.session.userId;
 
   try {
     if (!name || !kCal || !protein || !fat || !carbs) {
@@ -63,6 +69,7 @@ async (req, res, next) => {
     }
 
     const newFood = await FoodModel.create({
+      userId: authenticatedUserId,
       name: name,
       kCal: kCal,
       protein: protein,
@@ -79,13 +86,17 @@ async (req, res, next) => {
 export const updateFood: RequestHandler<UpdateFoodParams, unknown, FoodBody, unknown> = 
 async (req, res, next) => {
   const foodId = req.params.foodId;
+  const authenticatedUserId = req.session.userId;
 
   try {
     if(!mongoose.isValidObjectId(foodId)) {
       throw createHttpError(400, "Invalid food id");
     }
 
-    const food = await FoodModel.findById(foodId).exec();
+    const food = await FoodModel.findOne({
+      _id: foodId,
+      userId: authenticatedUserId
+    }).exec();
 
     if (!food) {
       throw createHttpError(404, "Food not found");
@@ -103,13 +114,17 @@ async (req, res, next) => {
 
 export const deleteFood: RequestHandler = async (req, res, next) => {
   const foodId = req.params.foodId;
+  const authenticatedUserId = req.session.userId;
 
   try {
     if(!mongoose.isValidObjectId(foodId)) {
       throw createHttpError(400, "Invalid food id");
     }
 
-    const food = await FoodModel.findById(foodId).exec();
+    const food = await FoodModel.findOne({
+      _id: foodId,
+      userId: authenticatedUserId
+    }).exec();
 
     if(!food){
       throw createHttpError(404, "Food not found");

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const foodSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
   name: { type: String, required: true, unique: true },
   kCal: { type: Number, required: true },
   protein: { type: Number, required: true },
