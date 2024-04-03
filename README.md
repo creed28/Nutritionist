@@ -1,6 +1,6 @@
-***<h1 style="text-align: center;">Nutritionist/h1>***
+***<h1 style="text-align: center;">Nutritionist</h1>***
 
-Nutritionist is a food website where users can easily search for and add foods to a table that calculates their nutritional values. It provides an intuitive interface for tracking calories and macronutrients, empowering users to make informed dietary choices.
+Nutritionist is a food website where users can easily search for and add foods to a table that calculates their nutritional values. It provides an intuitive interface for tracking calories and macros, empowering users to make informed dietary choices.
 
 ![image info](./Frontend/public/cover.png)
 
