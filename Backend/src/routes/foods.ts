@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get("/", FoodsController.getFoods);
 
+router.get("/search", FoodsController.searchFoods);
+
 router.get("/:foodId", FoodsController.getFood);
 
 router.post("/", FoodsController.createFood);

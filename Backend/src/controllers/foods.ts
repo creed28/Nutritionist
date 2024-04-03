@@ -13,6 +13,22 @@ export const getFoods: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const searchFoods: RequestHandler = async (req, res, next) => {
+  const searchInput = req.query.input;
+
+  try {
+    if (!searchInput || typeof searchInput !== 'string') {
+      throw createHttpError(400, "Search input is required and must be a string");
+    }
+
+    const foods = await FoodModel.find({ name: { $regex: new RegExp(searchInput, 'i') } }).exec();
+
+    res.status(200).json(foods);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getFood: RequestHandler = async (req, res, next) => {
   const foodId = req.params.foodId;
   
