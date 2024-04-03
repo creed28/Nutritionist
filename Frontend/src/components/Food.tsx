@@ -8,7 +8,7 @@ interface FoodProps {
 }
 
 const Food = ({ food }: FoodProps) => {
-  const { handleUpdate, handleDelete } = useFoodsContext();
+  const { handleRemove, handleDelete } = useFoodsContext();
 
   return (
     <div className='bg-white flex justify-between items-center w-[410px] px-4 py-2 
@@ -34,7 +34,7 @@ const Food = ({ food }: FoodProps) => {
         <div className='min-w-[30px]'>
           <IoRemoveCircle 
             title='Remove'
-            onClick={() => handleUpdate(food)}
+            onClick={() => handleRemove(food)}
             className='text-[#FB7271] hover:text-[#ed6564] cursor-pointer active:w-7' 
             size={30} 
           />
