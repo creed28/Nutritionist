@@ -6,7 +6,19 @@ const FoodList = () => {
   const { foods } = useFoodsContext();
 
   return (
-    <section className="flex flex-col items-center gap-y-1 mt-2">
+    <section 
+      style={{
+        overflowY: "scroll", 
+        overflow: "auto", 
+        overflowX: "hidden", 
+        height: "fit-content", 
+        maxHeight: "400px", 
+        display: "flex", 
+        flexDirection: "column",
+        gap: "4px",
+        scrollbarColor: "#a1a3a0 transparent",
+        scrollbarWidth: "thin"
+      }}>
       {foods.map((food: FoodModel) => (
         <Food 
           food={food} 
