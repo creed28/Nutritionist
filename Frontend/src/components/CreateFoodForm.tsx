@@ -22,12 +22,13 @@ const CreateFoodForm = () => {
     }} = useForm<FoodInput>();
 
   const navigate = useNavigate();
-  const { foods, setFoods } = useFoodsContext();
+  const { foods, setFoods, sumValues } = useFoodsContext();
 
   const onSubmit = async (input: FoodInput) => {
     try {
       const res = await axios.post("/foods", input);
       setFoods([...foods, res.data]);
+      sumValues([...foods, res.data]);
       navigate('/');
     } catch (error) {
         console.error(error);
@@ -36,7 +37,7 @@ const CreateFoodForm = () => {
 
   return (
     <section className="w-[500px] flex flex-col
-    bg-[#b5e2a5] py-4 my-11 rounded">
+    bg-[#b5e2a5] py-4 rounded">
       <div className="flex flex-col items-center">
         <h2 className="text-[2.3rem] font-Pacifico py-3">
           Create New Food
