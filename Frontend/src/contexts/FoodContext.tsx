@@ -21,7 +21,8 @@ interface FoodContextType {
   setSearchResults: React.Dispatch<React.SetStateAction<FoodModel[]>>,
   fetchSearchData: (input: string) => void,
   searchInput: string,
-  setSearchInput:  React.Dispatch<React.SetStateAction<string>>
+  setSearchInput:  React.Dispatch<React.SetStateAction<string>>,
+  loadFoodsInTable: () => void
 }
 
 export const FoodContext = createContext<FoodContextType | null>(null);
@@ -35,17 +36,17 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
   const [searchInput, setSearchInput] = useState<string>('');
   const [searchResults, setSearchResults] = useState<FoodModel[]>([]);
 
-  useEffect(() => {
-    const loadFoodsInTable = async () => {
-      try {
-        const res = await axios.get("/foods");
-        setFoods(res.data);
-        sumValues(res.data);
-      } catch (error) {
-          console.error(error);
-      }
+  const loadFoodsInTable = async () => {
+    try {
+      const res = await axios.get("/foods");
+      setFoods(res.data);
+      sumValues(res.data);
+    } catch (error) {
+        console.error(error);
     }
-    
+  }
+  
+  useEffect(() => {
     loadFoodsInTable();
   }, []);
   
@@ -141,6 +142,7 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     searchInput,
     setSearchInput,
     sumValues,
+    loadFoodsInTable
   };
 
   return (
