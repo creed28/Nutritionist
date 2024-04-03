@@ -4,6 +4,7 @@ import { Input } from "./ui/Input";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import useFoodsContext from "../hooks/useFoodsContext";
+import useAuth from "../hooks/useAuth";
 
 interface FoodInput {
   name: string,
@@ -17,10 +18,11 @@ const CreateFoodForm = () => {
   const { 
     register, 
     handleSubmit, 
-    formState :{ 
+    formState: { 
       isSubmitting 
-    }} = useForm<FoodInput>();
+    } } = useForm<FoodInput>();
 
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const { foods, setFoods, sumValues } = useFoodsContext();
 
@@ -45,7 +47,8 @@ const CreateFoodForm = () => {
       </div>
       <form 
         className="mb-2 flex flex-col mx-6" 
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="w-full flex items-center gap-y-4 flex-col">
           <Input
             placeholder="Name"
@@ -93,7 +96,8 @@ const CreateFoodForm = () => {
           <Button 
             className='w-full' 
             type="submit" 
-            disabled={isSubmitting}>
+            disabled={isSubmitting || auth === null}
+          >
               Create
           </Button>
         </div>
