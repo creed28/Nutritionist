@@ -9,7 +9,7 @@ export const MainRouter = createBrowserRouter(
       <Route element={<MainLayout />}>
         <Route path='/' element={<Home />} />
         <Route path='/create-food' element={<CreateFood />} />
-        </Route>
       </Route>
+    </Route>
   )
 );
