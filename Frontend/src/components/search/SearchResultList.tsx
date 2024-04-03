@@ -6,7 +6,7 @@ const SearchResultList = () => {
   const { searchResults } = useFoodsContext();
 
   return (
-    <div className="w-[30%] bg-white flex flex-col rounded-lg mt-1 max-h-[145px] absolute top-10">
+    <div className="w-[35%] bg-white flex flex-col rounded-lg mt-1 max-h-[145px] absolute top-10">
       {searchResults.map((food: FoodModel, index) => (
         <SearchResultItem food={food} key={index} />
       ))}

@@ -11,7 +11,7 @@ const SearchBar = () => {
   }
 
   return (
-    <section className="flex bg-white rounded-lg h-[2.5rem] px-4 items-center w-[30%]">
+    <section className="flex bg-white rounded-lg h-[2.5rem] px-4 items-center w-[35%]">
       <FaSearch />
       <Input 
         className="border-none h-full text-[1.25rem] ml-1"

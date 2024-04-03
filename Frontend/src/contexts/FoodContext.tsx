@@ -68,18 +68,14 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     setFatTotal(totals.fat);
   }
 
-
   const handleAdd = async (addedFood: FoodModel) => {
     try {
       const res = await axios.patch(`/foods/${addedFood._id}`, addedFood);
 
       if (res.data.inTable) {
-        setFoods(prevFoods => prevFoods.map((food) => 
-          food._id === addedFood._id ? res.data : food
-        ));
+        setSearchInput("");
         setFoods([...foods, addedFood]);
         sumValues([...foods, addedFood]);
-        setSearchInput("");
       }
     } catch (error) {
         console.error(error);
@@ -91,9 +87,9 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
       const res = await axios.patch(`/foods/${removedFood._id}`, removedFood);
 
       if (!res.data.inTable) {
+        setSearchInput("");
         setFoods(prevFoods => prevFoods.filter(food => food._id !== res.data._id));
         sumValues(foods.filter(food => food._id !== removedFood._id));
-        setSearchInput("");
       }
     } catch (error) {
         console.error(error);
@@ -103,9 +99,9 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
   const handleDelete = async (food: FoodModel) => {
     try {
       await axios.delete(`/foods/${food._id}`);
+      setSearchInput("");
       setFoods(prevFoods => prevFoods.filter(existingFood => existingFood._id !== food._id));
       sumValues(foods.filter(existingFood => existingFood._id !== food._id));
-      setSearchInput("");
     } catch (error) {
         console.error(error);
     }
@@ -121,8 +117,7 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
       const response = await axios.get(`/foods/search?input=${searchInput}`);
       setSearchResults(response.data);
     } catch (error) {
-      console.error(error);
-      throw error;
+        console.error(error);
     }
   }
 
@@ -142,7 +137,7 @@ export const FoodProvider = ({children} : FoodProviderProps) => {
     searchInput,
     setSearchInput,
     sumValues,
-    loadFoodsInTable
+    loadFoodsInTable,
   };
 
   return (

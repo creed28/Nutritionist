@@ -12,12 +12,13 @@ const FoodList = () => {
         overflow: "auto", 
         overflowX: "hidden", 
         height: "fit-content", 
-        maxHeight: "400px", 
+        maxHeight: "306px", 
         display: "flex", 
         flexDirection: "column",
         gap: "4px",
         scrollbarColor: "#a1a3a0 transparent",
-        scrollbarWidth: "thin"
+        scrollbarWidth: "thin",
+        paddingRight: "5px"
       }}>
       {foods.map((food: FoodModel) => (
         <Food 
